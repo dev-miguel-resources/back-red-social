@@ -1,0 +1,21 @@
+# Especificar que se ocupará desde la raíz del proyecto
+root = true
+
+# Especificar reglas para todos los archivos
+[*]
+max_line_length = 100
+indent_style = tab
+indent_size = 2
+trim_trailing_whitespace = true
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+
+# para contextos específicos
+[*.ts]
+quote_type = single
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+

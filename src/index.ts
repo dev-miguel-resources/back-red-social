@@ -1,7 +1,7 @@
 interface IPerson {
-    name: string;
-    lastname: string;
+	name: string;
+	lastname: string;
 }
 
-const person: IPerson = { name: 'John', lastname: 'Salgado' };
+const person: IPerson = { name: 'Albert', lastname: 'Michael' };
 console.log(person);
