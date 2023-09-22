@@ -4,4 +4,5 @@ interface IPerson {
 }
 
 const person: IPerson = { name: 'Albert', lastname: 'Michael' };
+
 console.log(person);
