@@ -1,24 +1,40 @@
 {
-  "compilerOptions": {
-    "module": "CommonJS" /* me permite dejar la definición de interpretación/transpilación de ts a js */,
-    "target": "ES2015", /* me permite definir la estandarización a ocupar del ECMMASCRIPT para luego vincularlo a un node de ejecución de node  */
-    "lib": ["DOM","ES2015"] /* me permite definir el ECMMASCRIPT con sus reglas para resolver tu ts */,
-    "esModuleInterop": true /* me permite verificar el código de ts a js y aplicar ciertas transformaciones para dar soporte a js */,
-    "resolveJsonModule": true /* me permite dar soporte a importaciones de archivos .json */,
-    "moduleResolution": "node" /* me permite interpretar al 100% la librería de ts y su compatibilidad con node */,
-    "noImplicitAny": true /* me permite verificar los tipos any en el proceso de compilación del ts */,
-    "sourceMap": true /* me permite verificar los tipos any en el proceso de compilación del ts */,
-    "experimentalDecorators": true /* me permite darle soporte a decoradores */,
-    "emitDecoratorMetadata": true /* me permite darle soporte y seguimiento a los decoradores en tiempo de ejecución */,
-    "strict": true /* me permite monitorear un set de reglas recomendadas para ts */,
-    "baseUrl": "./" /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */,
-    "outDir": "./cache" /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */,
-    "forceConsistentCasingInFileNames": true, /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */
-    "noUnusedLocals": true, /* me permite definir un error de compilación si detecta propiedades sin ocupar */
-    "noUnusedParameters": true, /* me permite definir un error de compilación si detecta argumentos sin ocupar dentro de un método o función */
-    "pretty": true /* me permite definir un formateador para los errores que ocurran en el proceso de compilación, para así identificarlos de manera más sencilla */
-    /* pendiente definición de alias paths */
-  },
-  "include": ["src/**/*.ts"], /* me permite definir los directorios que formen parte de la compilación y transpilación */
-  "exclude": ["node_modules"] /* me permite definir los directorios que quiero que excluya en la compilación y transpilación  */
+	"compilerOptions": {
+		"module": "CommonJS" /* me permite dejar la definición de interpretación/transpilación de ts a js */,
+		"target": "ES2015" /* me permite definir la estandarización a ocupar del ECMMASCRIPT para luego vincularlo a un node de ejecución de node  */,
+		"lib": [
+			"DOM",
+			"ES2015"
+		] /* me permite definir el ECMMASCRIPT con sus reglas para resolver tu ts */,
+		"esModuleInterop": true /* me permite verificar el código de ts a js y aplicar ciertas transformaciones para dar soporte a js */,
+		"resolveJsonModule": true /* me permite dar soporte a importaciones de archivos .json */,
+		"moduleResolution": "node" /* me permite interpretar al 100% la librería de ts y su compatibilidad con node */,
+		"noImplicitAny": true /* me permite verificar los tipos any en el proceso de compilación del ts */,
+		"sourceMap": true /* me permite verificar los tipos any en el proceso de compilación del ts */,
+		"experimentalDecorators": true /* me permite darle soporte a decoradores */,
+		"emitDecoratorMetadata": true /* me permite darle soporte y seguimiento a los decoradores en tiempo de ejecución */,
+		"strict": true /* me permite monitorear un set de reglas recomendadas para ts */,
+		"baseUrl": "./" /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */,
+		"outDir": "./cache" /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */,
+		"forceConsistentCasingInFileNames": true /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */,
+		"noUnusedLocals": true /* me permite definir un error de compilación si detecta propiedades sin ocupar */,
+		"noUnusedParameters": true /* me permite definir un error de compilación si detecta argumentos sin ocupar dentro de un método o función */,
+		"pretty": true /* me permite definir un formateador para los errores que ocurran en el proceso de compilación, para así identificarlos de manera más sencilla */,
+		"plugins": [
+			/* definimos el soporte como plugin para manejar la config. del alias paths */
+			{ "transform": "typescript-transform-paths" },
+			{ "transform": "typescript-transform-paths", "afterDeclarations": true }
+		],
+		"paths": {
+			// definimos la especificación de alias paths para tus directorios
+			"@bootstrap/*": ["src/bootstrap/*"],
+			"@configs/*": ["src/configs/*"]
+		}
+	},
+	"include": [
+		"src/**/*.ts"
+	] /* me permite definir los directorios que formen parte de la compilación y transpilación */,
+	"exclude": [
+		"node_modules"
+	] /* me permite definir los directorios que quiero que excluya en la compilación y transpilación  */
 }
