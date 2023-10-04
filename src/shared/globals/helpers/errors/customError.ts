@@ -1,6 +1,7 @@
 import { IError } from './interfaces/error.interface';
 
 export abstract class CustomError extends Error {
+	// aquí veremos el design pattern facade
 	abstract statusCode: number;
 	abstract status: string;
 
