@@ -28,7 +28,9 @@
 		"paths": {
 			// definimos la especificación de alias paths para tus directorios
 			"@bootstrap/*": ["src/bootstrap/*"],
-			"@configs/*": ["src/configs/*"]
+			"@configs/*": ["src/configs/*"],
+			"@interfaces/*": ["src/interfaces/*"],
+			"@helpers/*": ["src/shared/globals/helpers/*"],
 		}
 	},
 	"include": [

@@ -1,4 +1,4 @@
-import { Application, json, urlencoded, Request, Response } from 'express';
+import { Application, json, urlencoded, Request, Response, NextFunction } from 'express';
 import http from 'http';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -7,6 +7,11 @@ import compression from 'compression';
 import cookieSession from 'cookie-session';
 import 'express-async-errors';
 import { config } from '@configs/configEnvs';
+import HTTP_STATUS from 'http-status-codes';
+import { Server } from 'socket.io';
+import { IErrorResponse } from '@helpers/errors/interfaces/errorResponse.interface';
+import { CustomError } from '@helpers/errors/customError';
+import applicationRoutes from '@interfaces/http/routes';
 
 // SINGLE RESPONSABILITY: S
 // OPEN/CLOSED: O
@@ -21,6 +26,9 @@ export class RedSocialServer {
 		// definimos lo que va a ejecutar el servidor cuando se levante
 		this.securityMiddleware(this.app);
 		this.standardMiddleware(this.app);
+		this.routeMiddleware(this.app);
+		this.globalErrorHandler(this.app);
+		this.startServer(this.app);
 	}
 
 	private securityMiddleware(app: Application): void {
@@ -45,15 +53,52 @@ export class RedSocialServer {
 
 	private standardMiddleware(app: Application): void {
 		app.use(compression());
-		app.use(json({ limit: '50mb' }));
-		app.use(urlencoded({ extended: true, limit: '50mb' }));
+		app.use(json({ limit: '5mb' }));
+		app.use(urlencoded({ extended: true, limit: '5mb' }));
 	}
 
 	private routeMiddleware(app: Application): void {
-		// reconocimiento de rutas
+		applicationRoutes(app);
 	}
 
 	private globalErrorHandler(app: Application): void {
+		app.all('*', (req: Request, res: Response) => {
+			res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found` });
+		});
 
+		app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
+			console.log(error);
+			if (error instanceof CustomError) {
+				return res.status(error.statusCode).json(error.serializeErrors());
+			}
+			next();
+		});
+	}
+
+	private startHttpServer(httpServer: http.Server): void {
+		const PORT = Number(config.SERVER_PORT);
+		httpServer.listen(PORT, () => {
+			console.log(`Server running at ${PORT}.`);
+		});
+	}
+
+	private async startServer(app: Application): Promise<void> {
+		try {
+			const httpServer: http.Server = new http.Server(app);
+			// comunicación de mi servidor con express con el de sockets
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	private async createSocketIO(httpServer: http.Server): Promise<Server> {
+		const io: Server = new Server(httpServer, {
+			cors: {
+				origin: config.CLIENT_URL,
+				methods: ['GET', 'POST', 'PUT', 'DELETE']
+			}
+		});
+		// pendiente publishers and subscribers
+		return io;
 	}
 }
