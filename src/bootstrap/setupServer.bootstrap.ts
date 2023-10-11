@@ -9,6 +9,8 @@ import 'express-async-errors';
 import { config } from '@configs/configEnvs';
 import HTTP_STATUS from 'http-status-codes';
 import { Server } from 'socket.io';
+import { createClient } from 'redis';
+import { createAdapter } from '@socket.io/redis-adapter';
 import { IErrorResponse } from '@helpers/errors/interfaces/errorResponse.interface';
 import { CustomError } from '@helpers/errors/customError';
 import applicationRoutes from '@interfaces/http/routes';
@@ -85,7 +87,9 @@ export class RedSocialServer {
 	private async startServer(app: Application): Promise<void> {
 		try {
 			const httpServer: http.Server = new http.Server(app);
-			// comunicación de mi servidor con express con el de sockets
+			const socketIO: Server = await this.createSocketIO(httpServer);
+			this.startHttpServer(httpServer);
+			this.socketIOConnections(socketIO);
 		} catch (error) {
 			console.log(error);
 		}
@@ -98,7 +102,15 @@ export class RedSocialServer {
 				methods: ['GET', 'POST', 'PUT', 'DELETE']
 			}
 		});
-		// pendiente publishers and subscribers
+		const pubClient = createClient({ url: config.REDIS_HOST });
+		const subClient = pubClient.duplicate();
+		await Promise.all([pubClient.connect(), subClient.connect()]);
+		io.adapter(createAdapter(pubClient, subClient));
 		return io;
+	}
+
+	private socketIOConnections(io: Server): void {
+		console.log(io);
+		console.log('SocketIO Connections OK.');
 	}
 }
