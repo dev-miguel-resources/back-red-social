@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import compression from 'compression';
 import cookieSession from 'cookie-session';
+import Logger from 'bunyan';
 import 'express-async-errors';
 import { config } from '@configs/configEnvs';
 import HTTP_STATUS from 'http-status-codes';
@@ -14,6 +15,9 @@ import { createAdapter } from '@socket.io/redis-adapter';
 import { IErrorResponse } from '@helpers/errors/interfaces/errorResponse.interface';
 import { CustomError } from '@helpers/errors/customError';
 import applicationRoutes from '@interfaces/http/routes';
+import { logger } from '@configs/configLogs';
+
+const log: Logger = logger.createLogger('server');
 
 // SINGLE RESPONSABILITY: S
 // OPEN/CLOSED: O
@@ -69,7 +73,7 @@ export class RedSocialServer {
 		});
 
 		app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
-			console.log(error);
+			log.error(error);
 			if (error instanceof CustomError) {
 				return res.status(error.statusCode).json(error.serializeErrors());
 			}
@@ -80,7 +84,7 @@ export class RedSocialServer {
 	private startHttpServer(httpServer: http.Server): void {
 		const PORT = Number(config.SERVER_PORT);
 		httpServer.listen(PORT, () => {
-			console.log(`Server running at ${PORT}.`);
+			log.info(`Server running at ${PORT}.`);
 		});
 	}
 
@@ -91,7 +95,7 @@ export class RedSocialServer {
 			this.startHttpServer(httpServer);
 			this.socketIOConnections(socketIO);
 		} catch (error) {
-			console.log(error);
+			log.error(error);
 		}
 	}
 
@@ -111,6 +115,6 @@ export class RedSocialServer {
 
 	private socketIOConnections(io: Server): void {
 		console.log(io);
-		console.log('SocketIO Connections OK.');
+		log.info('SocketIO Connections OK.');
 	}
 }
