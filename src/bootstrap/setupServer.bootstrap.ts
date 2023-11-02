@@ -12,8 +12,8 @@ import HTTP_STATUS from 'http-status-codes';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
 import { createAdapter } from '@socket.io/redis-adapter';
-import { IErrorResponse } from '@helpers/errors/interfaces/errorResponse.interface';
-import { CustomError } from '@helpers/errors/customError';
+import { IErrorResponse } from '@errors/interfaces/errorResponse.interface';
+import { CustomError } from '@errors/customError';
 import applicationRoutes from '@interfaces/http/routes';
 import { logger } from '@configs/configLogs';
 

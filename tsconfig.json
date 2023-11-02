@@ -30,7 +30,8 @@
 			"@bootstrap/*": ["src/bootstrap/*"],
 			"@configs/*": ["src/configs/*"],
 			"@interfaces/*": ["src/interfaces/*"],
-			"@helpers/*": ["src/shared/globals/helpers/*"],
+			"@errors/*": ["src/shared/errors/*"],
+			"@services/*": ["src/shared/services/*"],
 		}
 	},
 	"include": [
