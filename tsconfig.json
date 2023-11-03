@@ -17,7 +17,7 @@
 		"baseUrl": "./" /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */,
 		"outDir": "./cache" /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */,
 		"forceConsistentCasingInFileNames": true /* me permite definir donde voy a dejar mi código transpilado, en este caso siempre se deja en la raíz */,
-		"noUnusedLocals": true /* me permite definir un error de compilación si detecta propiedades sin ocupar */,
+		"noUnusedLocals": false /* me permite definir un error de compilación si detecta propiedades sin ocupar */,
 		"noUnusedParameters": true /* me permite definir un error de compilación si detecta argumentos sin ocupar dentro de un método o función */,
 		"pretty": true /* me permite definir un formateador para los errores que ocurran en el proceso de compilación, para así identificarlos de manera más sencilla */,
 		"plugins": [
@@ -29,6 +29,8 @@
 			// definimos la especificación de alias paths para tus directorios
 			"@bootstrap/*": ["src/bootstrap/*"],
 			"@configs/*": ["src/configs/*"],
+			"@auth/*": ["src/features/auth/*"],
+			"@user/*": ["src/features/user/*"],
 			"@interfaces/*": ["src/interfaces/*"],
 			"@errors/*": ["src/shared/errors/*"],
 			"@services/*": ["src/shared/services/*"],
