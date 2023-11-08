@@ -25,5 +25,5 @@ export interface IUserDocument extends Document {
 	bgImageVersion: string;
 	bgImageId: string;
 	profilePicture: string;
-	createdAt?: Date;
+	createdAt?: Date | string;
 }

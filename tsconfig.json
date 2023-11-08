@@ -33,6 +33,7 @@
 			"@user/*": ["src/features/user/*"],
 			"@interfaces/*": ["src/interfaces/*"],
 			"@errors/*": ["src/shared/errors/*"],
+			"@generators/*": ["src/shared/generators/*"],
 			"@services/*": ["src/shared/services/*"],
 		}
 	},

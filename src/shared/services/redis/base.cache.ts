@@ -3,7 +3,6 @@ import { createClient } from 'redis';
 import { config } from '@configs/configEnvs';
 import { logger } from '@configs/configLogs';
 
-
 export type RedisClient = ReturnType<typeof createClient>;
 
 export abstract class BaseCache {
