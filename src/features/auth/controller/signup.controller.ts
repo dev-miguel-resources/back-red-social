@@ -1,9 +1,20 @@
-export class SignUp {
+import { Request, Response } from 'express';
+import { signupSchema } from '@auth/schemas/signup';
+import { joiValidation } from '@decorators/joiValidation.decorators';
+import { BadRequestError } from '@errors/badRequestError';
+import { authService } from '@services/db/auth.service';
 
-	// pendiente
+export class SignUpController {
+
+	@joiValidation(signupSchema)
 	public async register(req: Request, res: Response): Promise<void> {
-
+		const { username, email, password, avatarColor, avatarImage } = req.body;
+		const checkIfUserExist = await authService.getUserByUsernameOrEmail(username, email);
+		if (checkIfUserExist) {
+			throw new BadRequestError('Invalid credentials for this user');
+		}
 
 	}
-}
 
+
+}

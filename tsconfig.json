@@ -32,6 +32,7 @@
 			"@auth/*": ["src/features/auth/*"],
 			"@user/*": ["src/features/user/*"],
 			"@interfaces/*": ["src/interfaces/*"],
+			"@decorators/*": ["src/shared/decorators/*"],
 			"@errors/*": ["src/shared/errors/*"],
 			"@generators/*": ["src/shared/generators/*"],
 			"@services/*": ["src/shared/services/*"],
