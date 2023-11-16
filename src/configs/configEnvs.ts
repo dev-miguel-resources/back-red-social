@@ -10,6 +10,7 @@ class ConfigEnvs {
 	public SERVER_PORT: string | undefined;
 	public REDIS_HOST: string | undefined;
 	public DATABASE_URL: string | undefined;
+	public SALT_ROUND: string | undefined;
 
 	constructor() {
 		this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE;
@@ -19,6 +20,7 @@ class ConfigEnvs {
 		this.SERVER_PORT = process.env.SERVER_PORT;
 		this.REDIS_HOST = process.env.REDIS_HOST;
 		this.DATABASE_URL = process.env.DATABASE_URL;
+		this.SALT_ROUND = process.env.SALT_ROUND;
 	}
 
 	public validateConfig(): void {
