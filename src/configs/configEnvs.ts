@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import cloudinary from 'cloudinary';
 
 dotenv.config({});
 
@@ -11,6 +12,9 @@ class ConfigEnvs {
 	public REDIS_HOST: string | undefined;
 	public DATABASE_URL: string | undefined;
 	public SALT_ROUND: string | undefined;
+	public CLOUD_NAME: string | undefined;
+	public CLOUD_API_KEY: string | undefined;
+	public CLOUD_API_SECRET: string | undefined;
 
 	constructor() {
 		this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE;
@@ -21,6 +25,9 @@ class ConfigEnvs {
 		this.REDIS_HOST = process.env.REDIS_HOST;
 		this.DATABASE_URL = process.env.DATABASE_URL;
 		this.SALT_ROUND = process.env.SALT_ROUND;
+		this.CLIENT_URL = process.env.CLOUD_NAME;
+		this.CLOUD_API_KEY = process.env.CLOUD_API_KEY;
+		this.CLOUD_API_SECRET = process.env.CLOUD_API_SECRET;
 	}
 
 	public validateConfig(): void {
@@ -30,6 +37,14 @@ class ConfigEnvs {
 				throw new Error(`Configuration ${key} is undefined`);
 			}
 		}
+	}
+
+	public validateCloudinaryConfig(): void {
+		cloudinary.v2.config({
+			cloud_name: this.CLOUD_NAME,
+			api_key: this.CLOUD_API_KEY,
+			api_secret: this.CLOUD_API_SECRET
+		});
 	}
 }
 

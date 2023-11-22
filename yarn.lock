@@ -1538,6 +1538,21 @@ cliui@^8.0.1:
     strip-ansi "^6.0.1"
     wrap-ansi "^7.0.0"
 
+cloudinary-core@^2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.13.0.tgz#b59f90871b6c708c3d0735b9be47ac08181c57fb"
+  integrity sha512-Nt0Q5I2FtenmJghtC4YZ3MZZbGg1wLm84SsxcuVwZ83OyJqG9CNIGp86CiI6iDv3QobaqBUpOT7vg+HqY5HxEA==
+
+cloudinary@1.41.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.41.0.tgz#f9ac2653222ed8fb52d4b3d78ddcf7b5556f8c70"
+  integrity sha512-qFf2McjvILJITePf4VF1PrY/8c2zy+/q5FVV6V3VWrP/gpIZsusPqXL4QZ6ZKXibPRukzMYqsQEhaSQgJHKKow==
+  dependencies:
+    cloudinary-core "^2.13.0"
+    core-js "^3.30.1"
+    lodash "^4.17.21"
+    q "^1.5.1"
+
 cluster-key-slot@1.1.2, cluster-key-slot@^1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/cluster-key-slot/-/cluster-key-slot-1.1.2.tgz#88ddaa46906e303b5de30d3153b7d9fe0a0c19ac"
@@ -1656,6 +1671,11 @@ cookies@0.8.0:
   dependencies:
     depd "~2.0.0"
     keygrip "~1.1.0"
+
+core-js@^3.30.1:
+  version "3.33.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.33.3.tgz#3c644a323f0f533a0d360e9191e37f7fc059088d"
+  integrity sha512-lo0kOocUlLKmm6kv/FswQL8zbkH7mVsLJ/FULClOhv8WRVmKLVcs6XPNQAzstfeJTCHMyButEwG+z1kHxHoDZw==
 
 cors@2.8.5, cors@~2.8.5:
   version "2.8.5"
@@ -3638,6 +3658,11 @@ pure-rand@^6.0.0:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/pure-rand/-/pure-rand-6.0.3.tgz#3c9e6b53c09e52ac3cedffc85ab7c1c7094b38cb"
   integrity sha512-KddyFewCsO0j3+np81IQ+SweXLDnDQTs5s67BOnrYmYe/yNmUhttQyGsYzy8yUnoljGAQ9sl38YB4vH8ur7Y+w==
+
+q@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
+  integrity sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==
 
 qs@6.11.0:
   version "6.11.0"

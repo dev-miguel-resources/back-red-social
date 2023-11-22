@@ -1,3 +1,4 @@
+import { UploadApiResponse } from 'cloudinary';
 import { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import { signupSchema } from '@auth/schemas/signup';
@@ -7,6 +8,8 @@ import { authService } from '@services/db/auth.service';
 import { Generators } from '@generators/generators';
 import { IAuthDocument } from '@auth/interfaces/authDocument.interface';
 import { SignUpUtility } from './utilities/signup.utility';
+import { uploads } from '@services/cdn/cloudinary/cloudinaryUploads';
+import { IUserDocument } from '@user/interfaces/userDocument.interface';
 
 export class SignUpController extends SignUpUtility {
 	@joiValidation(signupSchema)
@@ -29,5 +32,15 @@ export class SignUpController extends SignUpUtility {
 			password: passwordHash,
 			avatarColor
 		});
+
+		const result: UploadApiResponse = await uploads(avatarImage, `${userObjectId}`) as UploadApiResponse;
+		if (!result?.public_id) {
+			throw new BadRequestError('File upload: Error ocurred. Try again.');
+		}
+
+		// redis cache + mongo
+		const userDataForCache: IUserDocument = SignUpController.prototype.userData(authData, userObjectId);
+
 	}
 }
+
