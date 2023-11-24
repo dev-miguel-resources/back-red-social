@@ -1,5 +1,5 @@
 //"bullmq": "3.13.4",
-import Queue from 'bull';
+import Queue, { Job } from 'bull';
 import Logger from 'bunyan';
 import { ExpressAdapter, createBullBoard, BullAdapter } from '@bull-board/express';
 import { config } from '@configs/configEnvs';
@@ -30,10 +30,9 @@ export abstract class BaseQueue {
 
 		this.log = logger.createLogger(`${queueName}Queue`);
 
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		/*this.queue.on('completed', (job: Job) => {
+		this.queue.on('completed', (job: Job) => {
 			//job.remove();
-		});*/
+		});
 
 		this.queue.on('global:completed', (jobId: string) => {
 			this.log.info(`Job ${jobId} completed`);

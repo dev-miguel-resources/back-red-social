@@ -1,8 +1,10 @@
 import { ObjectId } from 'mongodb';
+import JWT from 'jsonwebtoken';
 import { IAuthDocument } from '@auth/interfaces/authDocument.interface';
 import { ISignUpData } from '@auth/interfaces/signUpData.interface';
 import { Generators } from '@generators/generators';
 import { IUserDocument } from '@user/interfaces/userDocument.interface';
+import { config } from '@configs/configEnvs';
 
 export abstract class SignUpUtility {
 	protected signUpData(data: ISignUpData): IAuthDocument {
@@ -51,5 +53,18 @@ export abstract class SignUpUtility {
 				youtube: ''
 			}
 		} as unknown as IUserDocument;
+	}
+
+	protected signToken(data: IAuthDocument, userObjectId: ObjectId): string {
+		return JWT.sign(
+			{
+				userId: userObjectId,
+				uId: data.uId,
+				email: data.email,
+				username: data.username,
+				avatarColor: data.avatarColor
+			},
+			config.JWT_TOKEN!
+		);
 	}
 }

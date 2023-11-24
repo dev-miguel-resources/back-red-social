@@ -15,6 +15,8 @@ class ConfigEnvs {
 	public CLOUD_NAME: string | undefined;
 	public CLOUD_API_KEY: string | undefined;
 	public CLOUD_API_SECRET: string | undefined;
+	public CLOUD_DOMAIN: string | undefined;
+	public JWT_TOKEN: string | undefined;
 
 	constructor() {
 		this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE;
@@ -28,6 +30,8 @@ class ConfigEnvs {
 		this.CLIENT_URL = process.env.CLOUD_NAME;
 		this.CLOUD_API_KEY = process.env.CLOUD_API_KEY;
 		this.CLOUD_API_SECRET = process.env.CLOUD_API_SECRET;
+		this.CLOUD_DOMAIN = process.env.CLOUD_DOMAIN;
+		this.JWT_TOKEN = process.env.JWT_TOKEN;
 	}
 
 	public validateConfig(): void {
